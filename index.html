@@ -12,7 +12,7 @@
             color: #f8fafc;
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
-            overflow: hidden; 
+            overflow: hidden; /* Trava o scroll até entrar no site */
         }
         .font-game {
             font-family: 'LuckiestGuy', cursive;
@@ -36,6 +36,23 @@
             animation: floating 3s ease-in-out infinite;
         }
 
+        @keyframes pulse-gold {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        }
+        .pulse-button {
+            animation: pulse-gold 2s infinite;
+        }
+
+        .plan-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .plan-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #fbbf24;
+        }
+
         /* Splash Screen overlay */
         #splash-screen {
             background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('01-background branco.jpg');
@@ -43,11 +60,11 @@
             background-position: center;
         }
 
-        #coming-soon-screen {
-            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)), url('01-background branco.jpg');
-            background-size: cover;
-            background-position: center;
-            display: none;
+        /* Radio styling */
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -56,89 +73,395 @@
     <!-- Tela Inicial (Splash Screen) -->
     <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center">
         <div class="relative z-10 max-w-4xl w-full">
-            <img src="logo.png" alt="Logo 999 Interativo" class="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-yellow-400 shadow-2xl mx-auto mb-8 floating-key">
+            <img src="logo.png" alt="Logo 999 Interativo" class="w-28 h-28 md:w-48 md:h-48 rounded-full border-4 border-yellow-400 shadow-2xl mx-auto mb-6 md:mb-8 floating-key" onerror="this.src='https://via.placeholder.com/150/fbbf24/000?text=LOGO'">
             
-            <h1 class="font-game text-5xl md:text-7xl text-yellow-400 neon-text mb-4 uppercase">999 INTERATIVO</h1>
-            <p class="text-slate-300 mb-12 uppercase tracking-[0.3em] text-sm font-bold">Portal de Acesso e Suporte</p>
+            <h1 class="font-game text-4xl md:text-7xl text-yellow-400 neon-text mb-4 uppercase tracking-tighter">999 INTERATIVO</h1>
+            <p class="text-slate-300 mb-8 md:mb-12 uppercase tracking-[0.2em] md:tracking-[0.3em] text-xs md:sm font-bold">Portal de Acesso e Suporte</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <!-- Opção Live Pix (ATIVO) -->
-                <a href="https://livepix.gg/dzxdropzone" target="_blank" class="glass p-10 rounded-[2.5rem] border border-green-500/30 hover:border-green-400 transition-all group hover:bg-green-500/10">
-                    <div class="text-6xl mb-6 group-hover:scale-110 transition-transform">💸</div>
-                    <h2 class="font-game text-2xl text-green-400 mb-2 uppercase">Live Pix</h2>
-                    <p class="text-slate-400 text-xs uppercase font-bold tracking-tighter">Apoiar as Lives</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto w-full">
+                <!-- Opção Live Pix -->
+                <a href="https://livepix.gg/dzxdropzone" target="_blank" class="glass p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-green-500/30 hover:border-green-400 transition-all group hover:bg-green-500/10">
+                    <div class="text-4xl md:text-6xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">💸</div>
+                    <h2 class="font-game text-xl md:text-2xl text-green-400 mb-2 uppercase">Live Pix</h2>
+                    <p class="text-slate-400 text-[10px] md:text-xs uppercase font-bold tracking-tighter">Apoiar as Lives</p>
                 </a>
 
-                <!-- Opção Loja (EM BREVE) -->
-                <button onclick="showComingSoon('LOJA')" class="glass p-10 rounded-[2.5rem] border border-yellow-500/30 hover:border-yellow-400 transition-all group hover:bg-yellow-500/10 text-center">
-                    <div class="text-6xl mb-6 group-hover:scale-110 transition-transform">🗝️</div>
-                    <h2 class="font-game text-2xl text-yellow-400 mb-2 uppercase">Entrar na Loja</h2>
-                    <p class="text-slate-400 text-xs uppercase font-bold tracking-tighter">Comprar Acesso VIP</p>
+                <!-- Opção Loja Principal -->
+                <button onclick="enterSite()" class="glass p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-yellow-500/30 hover:border-yellow-400 transition-all group hover:bg-yellow-500/10 text-center">
+                    <div class="text-4xl md:text-6xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">🗝️</div>
+                    <h2 class="font-game text-xl md:text-2xl text-yellow-400 mb-2 uppercase">Entrar na Loja</h2>
+                    <p class="text-slate-400 text-[10px] md:text-xs uppercase font-bold tracking-tighter">Comprar Acesso VIP</p>
                 </button>
             </div>
             
-            <div class="mt-12 flex flex-col items-center gap-4">
-                <!-- Opção Discord (EM BREVE) -->
-                <button onclick="showComingSoon('DISCORD')" class="bg-indigo-600/20 hover:bg-indigo-600 transition-all border border-indigo-500 px-8 py-3 rounded-full flex items-center gap-3 text-sm font-black uppercase tracking-widest group">
-                    <span class="text-xl group-hover:rotate-12 transition-transform">💬</span> Discord Oficial
-                </button>
+            <div class="mt-8 md:mt-12 flex flex-col items-center gap-4">
+                <a href="https://discord.gg/5a59nep8Te" target="_blank" class="bg-indigo-600/20 hover:bg-indigo-600 transition-all border border-indigo-500 px-6 md:px-8 py-3 rounded-full flex items-center gap-3 text-xs md:text-sm font-black uppercase tracking-widest group w-full md:w-auto justify-center">
+                    <span class="text-lg md:text-xl">💬</span> Discord Oficial
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Tela de Em Breve -->
-    <div id="coming-soon-screen" class="fixed inset-0 z-[110] flex flex-col items-center justify-center p-6 text-center">
-        <div class="relative z-10 max-w-4xl w-full">
-            <div class="text-8xl mb-8 animate-bounce">🚧</div>
-            <h2 class="font-game text-5xl md:text-8xl text-yellow-400 neon-text mb-6 uppercase">Em Breve</h2>
-            <p id="coming-soon-text" class="text-slate-300 mb-12 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
-                Estamos a preparar as melhores novidades para ti. Fica atento às lives e às nossas redes sociais para o lançamento oficial!
-            </p>
+    <!-- Conteúdo Principal do Site -->
+    <div id="main-content" class="opacity-0">
+        <!-- Header -->
+        <header class="p-4 md:p-6 fixed w-full z-40 bg-[#0f172a]/90 backdrop-blur-md border-b border-white/5">
+            <div class="max-w-6xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2 md:gap-3">
+                    <img src="logo.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-yellow-400" onerror="this.style.display='none'">
+                    <h1 class="font-game text-lg md:text-2xl text-yellow-400 uppercase tracking-tighter">999 INTERATIVO</h1>
+                </div>
+                <nav class="hidden lg:block">
+                    <ul class="flex space-x-6 font-bold uppercase text-[10px] tracking-widest items-center">
+                        <li><a href="#inicio" class="hover:text-yellow-400 transition">Início</a></li>
+                        <li><a href="#planos" class="hover:text-yellow-400 transition">Chaves</a></li>
+                        <li><a href="#programas" class="hover:text-yellow-400 transition">Downloads</a></li>
+                        <li><a href="https://discord.gg/5a59nep8Te" target="_blank" class="text-indigo-400 hover:text-white transition">Discord</a></li>
+                        <li><a href="https://livepix.gg/dzxdropzone" target="_blank" class="bg-green-500/10 text-green-400 border border-green-500/20 px-4 py-2 rounded-full hover:bg-green-500 hover:text-black transition shadow-[0_0_15px_rgba(34,197,94,0.1)]">Live Pix 💸</a></li>
+                    </ul>
+                </nav>
+                <a href="#planos" class="bg-yellow-400 text-black px-4 md:px-5 py-2 rounded-full font-black text-[9px] md:text-[10px] hover:bg-yellow-300 transition uppercase shadow-[0_5px_15px_rgba(251,191,36,0.2)]">Comprar</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="inicio" class="pt-32 md:pt-48 pb-12 md:pb-16 px-6 text-center overflow-hidden">
+            <div class="max-w-6xl mx-auto relative">
+                <div class="mb-6 inline-flex items-center gap-2 p-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 font-bold rounded-full px-4 text-[8px] md:text-[9px] tracking-[0.1em] md:tracking-[0.2em] uppercase">
+                    <span class="flex h-2 w-2 rounded-full bg-yellow-400 animate-ping"></span>
+                    Early Access Ativado: Chaves Disponíveis
+                </div>
+                
+                <h2 class="text-3xl md:text-8xl font-extrabold mb-4 md:mb-6 leading-tight md:leading-[1.1]">
+                    Desbloqueie o <br><span class="text-yellow-400 text-4xl md:text-8xl">Poder Supremo</span>
+                </h2>
+                <p class="text-slate-400 text-sm md:text-xl max-w-3xl mx-auto mb-10 md:mb-12">
+                    Garanta sua chave agora e <b>comece a faturar hoje mesmo</b> com o controle total sobre as interações do Obby mais desafiador do Roblox.
+                </p>
+
+                <!-- Imagem do Jogo -->
+                <div class="relative w-full max-w-5xl mx-auto group">
+                    <div class="absolute inset-0 bg-yellow-400/10 blur-[50px] md:blur-[100px] rounded-full"></div>
+                    <div class="relative rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-2 border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                        <img src="01-background branco.jpg" alt="Preview 999" class="w-full h-auto min-h-[200px] object-cover transition duration-700 group-hover:scale-105" onerror="this.src='https://via.placeholder.com/1200x600/1e293b/fbbf24?text=999+INTERATIVO'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="planos" class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="font-game text-3xl md:text-6xl mb-4 neon-text text-yellow-400 uppercase">Chaves de Acesso</h3>
+                <p class="text-slate-500 text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] font-black italic">Preços promocionais Early Access</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                <!-- BRONZE (03 DIAS) -->
+                <div class="plan-card glass p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col border border-white/5 relative overflow-hidden">
+                    <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">40% OFF</div>
+                    <div class="text-4xl md:text-5xl mb-4 floating-key">🥉</div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-orange-400 mb-4 md:mb-6">Bronze Key</h4>
+                    <div class="mb-6">
+                        <p class="text-[9px] text-slate-500 line-through">De R$ 25</p>
+                        <span class="text-3xl md:text-4xl font-game text-white">R$ 15</span>
+                    </div>
+                    <div class="bg-slate-800/80 rounded-2xl p-2 md:p-3 mb-6">
+                        <p class="text-[8px] md:text-[9px] font-bold text-green-400 uppercase">Acesso Imediato</p>
+                    </div>
+                    <ul class="text-[10px] md:text-[11px] text-slate-400 space-y-2 md:space-y-3 mb-8 flex-grow">
+                        <li>✓ 03 Dias de Acesso</li>
+                        <li>✓ Layout Pronto para Lives</li>
+                        <li>✓ Tutorial de configuração</li>
+                    </ul>
+                    <button onclick="openModal('Bronze Key (03 Dias)', 'R$ 15')" class="w-full bg-slate-700 hover:bg-slate-600 py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase">Escolher</button>
+                </div>
+
+                <!-- SILVER (30 DIAS) -->
+                <div class="plan-card glass p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col border border-slate-400/20 bg-slate-400/5 relative overflow-hidden">
+                    <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">50% OFF</div>
+                    <div class="text-4xl md:text-5xl mb-4 floating-key" style="animation-delay: 0.3s;">🥈</div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-slate-200 mb-4 md:mb-6">Silver Key</h4>
+                    <div class="mb-6">
+                        <p class="text-[10px] text-slate-500 line-through">De R$ 100</p>
+                        <span class="text-3xl md:text-4xl font-game text-white">R$ 50</span>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-2 md:p-3 mb-6 border border-white/10">
+                        <p class="text-[8px] md:text-[9px] font-bold text-white uppercase">Restam 08 / 10</p>
+                    </div>
+                    <ul class="text-[10px] md:text-[11px] text-slate-400 space-y-2 md:space-y-3 mb-8 flex-grow text-left list-disc pl-4">
+                        <li>30 Dias de Acesso</li>
+                        <li>Tutorial de configuração</li>
+                        <li>Sugestões de Atualização Futuras</li>
+                        <li>Tag [Apoiador]</li>
+                    </ul>
+                    <button onclick="openModal('Silver Key (30 Dias)', 'R$ 50')" class="w-full bg-white text-black py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase hover:bg-slate-200">Obter Prata</button>
+                </div>
+
+                <!-- GOLDEN (90 DIAS) -->
+                <div class="plan-card glass p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col border-2 border-yellow-400 relative shadow-[0_0_40px_rgba(251,191,36,0.1)] overflow-hidden">
+                    <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">52% OFF</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-[8px] font-black py-1 px-4 rounded-full uppercase">🔥 Recomendado</div>
+                    <div class="text-5xl mb-4 floating-key" style="animation-delay: 0.6s;">🔑</div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-white mb-4 md:mb-6">Golden Key</h4>
+                    <div class="mb-6">
+                        <p class="text-[10px] text-slate-500 line-through">De R$ 290</p>
+                        <span class="text-3xl md:text-4xl font-game text-yellow-400">R$ 140</span>
+                    </div>
+                    <div class="bg-yellow-400 rounded-2xl p-2 md:p-3 mb-6">
+                        <p class="text-[8px] md:text-[9px] font-bold text-black uppercase">Restam 05 / 05</p>
+                    </div>
+                    <ul class="text-[10px] md:text-[11px] text-slate-300 space-y-2 md:space-y-3 mb-8 flex-grow font-bold text-left list-disc pl-4">
+                        <li>Tudo da Chave Silver</li>
+                        <li>90 Dias de Acesso</li>
+                        <li>Prioridade em Eventos</li>
+                    </ul>
+                    <button onclick="openModal('Golden Key (90 Dias)', 'R$ 140')" class="w-full bg-yellow-400 text-black py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase pulse-button">Comprar Ouro</button>
+                </div>
+
+                <!-- DIAMOND (180 DIAS) -->
+                <div class="plan-card glass p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col border border-cyan-400/30 bg-cyan-400/5 relative overflow-hidden">
+                    <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">57% OFF</div>
+                    <div class="text-4xl md:text-5xl mb-4 floating-key" style="animation-delay: 1s;">💎</div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-cyan-400 mb-4 md:mb-6">Diamond Key</h4>
+                    <div class="mb-6">
+                        <p class="text-[10px] text-slate-500 line-through">De R$ 570</p>
+                        <span class="text-3xl md:text-4xl font-game text-white">R$ 250</span>
+                    </div>
+                    <div class="bg-cyan-400/10 rounded-2xl p-2 md:p-3 mb-6 border border-cyan-400/20">
+                        <p class="text-[8px] md:text-[9px] font-bold text-cyan-400 uppercase">Restam 02 / 02</p>
+                    </div>
+                    <ul class="text-[10px] md:text-[11px] text-slate-400 space-y-2 md:space-y-3 mb-8 flex-grow text-left list-disc pl-4">
+                        <li>Tudo da Chave Golden</li>
+                        <li>180 Dias de Acesso</li>
+                        <li>Tag [Fundador] no Discord</li>
+                    </ul>
+                    <button onclick="openModal('Diamond Key (180 Dias)', 'R$ 250')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase">Garantir Diamante</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Downloads -->
+        <section id="programas" class="max-w-6xl mx-auto px-4 md:px-6 py-16 md:py-24 rounded-[2rem] md:rounded-[3rem] border-y border-white/5 bg-slate-900/40">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="font-game text-2xl md:text-3xl text-white mb-2 uppercase tracking-tighter">Downloads Oficiais</h3>
+                <p class="text-slate-500 text-[10px] md:text-sm uppercase font-bold tracking-widest">Prepare o seu computador</p>
+            </div>
             
-            <button onclick="showSplash()" class="bg-yellow-400 text-black px-12 py-4 rounded-full font-black uppercase tracking-widest hover:bg-yellow-300 transition-all shadow-[0_10px_30px_rgba(251,191,36,0.3)]">
-                ⬅ Voltar
-            </button>
-        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- ROBLOX -->
+                <a href="https://www.roblox.com/pt/download" target="_blank" class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 transition flex items-center gap-4 group hover:bg-white/5">
+                    <div class="bg-slate-800 p-3 md:p-4 rounded-xl md:rounded-2xl text-xl md:text-2xl group-hover:bg-yellow-400/20 transition">🎮</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white uppercase tracking-widest text-[8px] md:text-[9px]">Roblox Client</h4>
+                        <p class="text-[7px] md:text-[8px] text-slate-500 uppercase">Download Oficial</p>
+                    </div>
+                </a>
+
+                <!-- STREAM TO EARN -->
+                <a href="https://streamtoearn.io/" target="_blank" class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 transition flex items-center gap-4 group hover:bg-white/5">
+                    <div class="bg-slate-800 p-3 md:p-4 rounded-xl md:rounded-2xl text-xl md:text-2xl group-hover:bg-yellow-400/20 transition">📈</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white uppercase tracking-widest text-[8px] md:text-[9px]">Stream to Earn</h4>
+                        <p class="text-[7px] md:text-[8px] text-slate-500 uppercase">Sistema de Ganhos</p>
+                    </div>
+                </a>
+
+                <!-- TIKFINITY -->
+                <a href="https://tikfinity.zerody.one/" target="_blank" class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 transition flex items-center gap-4 group hover:bg-white/5">
+                    <div class="bg-slate-800 p-3 md:p-4 rounded-xl md:rounded-2xl text-xl md:text-2xl group-hover:bg-yellow-400/20 transition">📱</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white uppercase tracking-widest text-[8px] md:text-[9px]">Tikfinity App</h4>
+                        <p class="text-[7px] md:text-[8px] text-slate-500 uppercase">Interação Direta</p>
+                    </div>
+                </a>
+
+                <!-- TIKTOK LIVE STUDIO -->
+                <a href="https://www.tiktok.com/studio/download" target="_blank" class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 transition flex items-center gap-4 group hover:bg-white/5">
+                    <div class="bg-slate-800 p-3 md:p-4 rounded-xl md:rounded-2xl text-xl md:text-2xl group-hover:bg-pink-500/20 transition text-pink-400">🎥</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white uppercase tracking-widest text-[8px] md:text-[9px]">Live Studio</h4>
+                        <p class="text-[7px] md:text-[8px] text-slate-500 uppercase">Fazer Live TikTok</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 md:py-20 text-center border-t border-white/5">
+            <div class="max-w-4xl mx-auto px-6">
+                <img src="logo.png" alt="Logo" class="w-12 h-12 md:w-16 md:h-16 rounded-full mx-auto mb-6 opacity-70 border border-yellow-400" onerror="this.style.display='none'">
+                <h1 class="font-game text-lg md:text-xl text-yellow-400 mb-6 uppercase tracking-tighter">999 INTERATIVO</h1>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-slate-500 mb-8">
+                    <a href="https://discord.gg/5a59nep8Te" target="_blank" class="hover:text-indigo-400 transition">Discord Oficial</a>
+                    <a href="https://livepix.gg/dzxdropzone" target="_blank" class="hover:text-green-400 transition">Live Pix</a>
+                    <a href="https://discord.gg/5a59nep8Te" target="_blank" class="hover:text-white transition">Suporte Técnico</a>
+                </div>
+                <p class="text-slate-700 text-[7px] md:text-[8px] leading-loose max-w-xs mx-auto md:max-w-none">
+                    Roblox é uma marca registrada da Roblox Corporation. © 2026 Studio Interativo - Salvador, BA.
+                </p>
+            </div>
+        </footer>
     </div>
 
-    <!-- Conteúdo Principal do Site (Oculto para a fase de 'Em Breve') -->
-    <div id="main-content" class="opacity-0 pointer-events-none">
-        <!-- O código original da loja permanece aqui apenas para preservação lógica -->
+    <!-- Modal de Pedido -->
+    <div id="orderModal" class="fixed inset-0 bg-[#020617]/98 flex items-center justify-center p-4 md:p-6 z-[110] hidden backdrop-blur-md overflow-y-auto">
+        <div class="glass w-full max-w-xl p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] relative border border-white/10 my-4 md:my-8">
+            <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition text-2xl md:text-3xl">✕</button>
+            
+            <div class="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
+                <div class="bg-yellow-400/20 p-3 md:p-5 rounded-xl md:rounded-[1.5rem] text-3xl md:text-4xl">🗝️</div>
+                <div class="text-left">
+                    <h5 class="text-lg md:text-2xl font-extrabold text-white uppercase tracking-tighter">Dados do Pedido</h5>
+                    <p id="selectedPlanText" class="text-yellow-400 font-bold italic text-[10px] md:text-sm">Chave: ---</p>
+                </div>
+            </div>
+
+            <!-- AVISO DE REEMBOLSO LIMPO -->
+            <div class="bg-yellow-400/5 border border-yellow-400/20 p-4 rounded-2xl mb-6 text-[11px] leading-relaxed text-left">
+                <p class="text-yellow-400 font-black uppercase mb-1 tracking-widest flex items-center gap-2 text-xs">
+                    <span>⚠️</span> Importante
+                </p>
+                <p class="text-slate-400">
+                    Existe a possibilidade de reembolso <b>APENAS</b> se a chave <b>NÃO</b> tiver sido ativada num período de 3 dias. Caso contrário, o reembolso não será possível.
+                </p>
+            </div>
+
+            <form id="purchaseForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 text-left">
+                <div class="md:col-span-2">
+                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nome Completo</label>
+                    <input type="text" id="name" placeholder="Seu nome" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none focus:ring-1 focus:ring-yellow-400 transition text-sm">
+                </div>
+                <div>
+                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nick Roblox</label>
+                    <input type="text" id="nick" placeholder="@SeuNick" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                </div>
+                <div>
+                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">ID Roblox</label>
+                    <input type="text" id="robloxId" placeholder="ID Numérico" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                </div>
+
+                <!-- CAMPO PC SIM/NÃO -->
+                <div class="md:col-span-2">
+                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block italic">Você utiliza computador (PC) para jogar?</label>
+                    <div class="flex gap-4 md:gap-8 items-center bg-slate-900/50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-white/5">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="radio" name="isPC" value="Sim" required class="accent-yellow-400">
+                            <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Sim</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="radio" name="isPC" value="Não" class="accent-yellow-400">
+                            <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Não</span>
+                        </label>
+                    </div>
+                    <!-- MENSAGEM DE ERRO -->
+                    <p id="pc-error" class="text-[8px] md:text-[10px] text-red-500 mt-2 hidden font-black uppercase tracking-tighter leading-tight">
+                        ⚠️ Erro: Somente PC! Este sistema é incompatível com celular ou console.
+                    </p>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">E-mail para Contato</label>
+                    <input type="email" id="email" placeholder="email@exemplo.com" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">WhatsApp</label>
+                    <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                </div>
+                <div class="md:col-span-2 pt-2 md:pt-4">
+                    <button type="submit" class="w-full bg-yellow-400 text-black py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-yellow-300 transition-all shadow-[0_10px_30px_rgba(251,191,36,0.2)]">
+                        🚀 Finalizar no WhatsApp
+                    </button>
+                    <p class="text-[7px] md:text-[9px] text-slate-500 text-center uppercase mt-4 md:mt-6 tracking-widest italic">A liberação ocorre via PIX no WhatsApp.</p>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
-        function showComingSoon(type) {
+        let currentPlan = "";
+        let currentPrice = "";
+
+        const MEU_WHATSAPP = "5571986950984"; 
+
+        // Entrar no site e remover Splash
+        function enterSite() {
             const splash = document.getElementById('splash-screen');
-            const coming = document.getElementById('coming-soon-screen');
-            const text = document.getElementById('coming-soon-text');
+            const main = document.getElementById('main-content');
             
-            if(type === 'DISCORD') {
-                text.innerHTML = "A nossa comunidade no <b>Discord</b> está a ser configurada para te receber com a melhor experiência. Voltamos em breve!";
-            } else {
-                text.innerHTML = "Estamos a preparar as melhores ofertas de <b>Early Access</b> para ti. Fica atento às nossas redes sociais!";
-            }
+            splash.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+            splash.style.transform = "scale(1.1)";
+            splash.style.opacity = "0";
             
-            splash.style.display = "none";
-            coming.style.display = "flex";
-            coming.style.opacity = "0";
             setTimeout(() => {
-                coming.style.transition = "opacity 0.5s ease";
-                coming.style.opacity = "1";
-            }, 10);
+                splash.style.display = "none";
+                main.style.transition = "opacity 0.8s ease";
+                main.style.opacity = "1";
+                document.body.style.overflow = 'auto';
+            }, 600);
         }
 
-        function showSplash() {
-            const splash = document.getElementById('splash-screen');
-            const coming = document.getElementById('coming-soon-screen');
-            
-            coming.style.display = "none";
-            splash.style.display = "flex";
-            splash.style.opacity = "0";
-            setTimeout(() => {
-                splash.style.transition = "opacity 0.5s ease";
-                splash.style.opacity = "1";
-            }, 10);
+        function openModal(plan, price) {
+            currentPlan = plan;
+            currentPrice = price;
+            document.getElementById('selectedPlanText').innerText = `CHAVE: ${plan} - VALOR: ${price}`;
+            document.getElementById('orderModal').classList.remove('hidden');
+            document.getElementById('pc-error').classList.add('hidden'); // Reseta erro
+            document.body.style.overflow = 'hidden';
         }
+
+        function closeModal() {
+            document.getElementById('orderModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validação de PC
+            const isPC = document.querySelector('input[name="isPC"]:checked').value;
+            const errorMsg = document.getElementById('pc-error');
+            
+            if (isPC === "Não") {
+                errorMsg.classList.remove('hidden');
+                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return; // Bloqueia o envio
+            } else {
+                errorMsg.classList.add('hidden');
+            }
+
+            const userData = {
+                name: document.getElementById('name').value,
+                nick: document.getElementById('nick').value,
+                id: document.getElementById('robloxId').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('whatsapp').value
+            };
+            
+            const pedidoID = Math.floor(Math.random() * 90000) + 10000;
+            
+            // CONSTRUÇÃO DA MENSAGEM COM EMOJIS COMPATÍVEIS
+            const message = 
+                "*NOVO PEDIDO - 999 INTERATIVO*\n" +
+                "*Pedido:* #" + pedidoID + "\n" +
+                "*Chave:* " + currentPlan + "\n" +
+                "*Valor:* " + currentPrice + "\n" +
+                "*Plataforma:* PC CONFIRMADO\n" +
+                "----------------------------\n" +
+                "*Cliente:* " + userData.name + "\n" +
+                "*Nick:* " + userData.nick + "\n" +
+                "*Roblox ID:* " + userData.id + "\n" +
+                "*E-mail:* " + userData.email + "\n" +
+                "*WhatsApp:* " + userData.phone + "\n" +
+                "----------------------------\n" +
+                "*STATUS:* AGUARDANDO ATENDIMENTO";
+            
+            // Codificação URI robusta
+            const encodedMsg = encodeURIComponent(message);
+            window.open("https://wa.me/" + MEU_WHATSAPP + "?text=" + encodedMsg, '_blank');
+            closeModal();
+        });
     </script>
 </body>
 </html>
