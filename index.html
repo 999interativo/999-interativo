@@ -18,6 +18,10 @@
             font-family: 'LuckiestGuy', cursive;
             letter-spacing: 2px;
         }
+        .font-luckiest {
+            font-family: 'Luckiest Guy', cursive;
+            letter-spacing: 2px;
+        }
         .neon-text {
             text-shadow: 0 0 10px #fbbf24, 0 0 20px #fbbf24;
         }
@@ -43,6 +47,48 @@
         }
         .pulse-button {
             animation: pulse-gold 2s infinite;
+        }
+
+        /* Efeitos Sistema de Indicação */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+        .shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop-in {
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Efeito Rainbow Pulsante */
+        @keyframes rainbow-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        .rainbow-pulse-text {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00bfff, #8a2be2, #ff0000);
+            background-size: 200% auto;
+            color: transparent !important;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-bg 4s linear infinite, gentle-pulse 1.5s ease-in-out infinite;
+            display: inline-block;
+            will-change: transform, background-position;
         }
 
         .plan-card {
@@ -162,19 +208,22 @@
                     <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">60% OFF</div>
                     <div class="text-4xl md:text-5xl mb-4 floating-key">🥉</div>
                     <h4 class="text-xs font-black uppercase tracking-[0.2em] text-orange-400 mb-4 md:mb-6">Bronze Key</h4>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <p class="text-[9px] text-slate-500 line-through">De R$ 75</p>
                         <span class="text-3xl md:text-4xl font-game text-white">R$ 30</span>
+                        <div class="mt-2 text-yellow-400 font-black text-[11px] md:text-xs bg-yellow-400/10 py-1.5 px-2 rounded-xl border border-yellow-400/20 flex justify-center items-center gap-1.5 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+                            <span class="text-lg leading-none">🏷️</span> R$ 25,50 com código
+                        </div>
                     </div>
                     <div class="bg-slate-800/80 rounded-2xl p-2 md:p-3 mb-6">
-                        <p class="text-[8px] md:text-[9px] font-bold text-green-400 uppercase">Acesso Imediato</p>
+                        <p class="text-[8px] md:text-[10px] font-bold text-green-400 uppercase">Recupere o valor no 1º dia</p>
                     </div>
                     <ul class="text-[10px] md:text-[11px] text-slate-400 space-y-2 md:space-y-3 mb-8 flex-grow">
                         <li>✓ 03 Dias de Acesso</li>
                         <li>✓ Layout Pronto para Lives</li>
                         <li>✓ Tutorial de configuração</li>
                     </ul>
-                    <button onclick="openModal('Bronze Key (03 Dias)', 'R$ 30')" class="w-full bg-slate-700 hover:bg-slate-600 py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase">Escolher</button>
+                    <button onclick="openModal('Bronze Key (03 Dias)', 30)" class="w-full bg-slate-700 hover:bg-slate-600 py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase">Escolher</button>
                 </div>
 
                 <!-- SILVER (30 DIAS) -->
@@ -182,12 +231,15 @@
                     <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">55% OFF</div>
                     <div class="text-4xl md:text-5xl mb-4 floating-key" style="animation-delay: 0.3s;">🥈</div>
                     <h4 class="text-xs font-black uppercase tracking-[0.2em] text-slate-200 mb-4 md:mb-6">Silver Key</h4>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <p class="text-[10px] text-slate-500 line-through">De R$ 222</p>
                         <span class="text-3xl md:text-4xl font-game text-white">R$ 100</span>
+                        <div class="mt-2 text-yellow-400 font-black text-[11px] md:text-xs bg-yellow-400/10 py-1.5 px-2 rounded-xl border border-yellow-400/20 flex justify-center items-center gap-1.5 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+                            <span class="text-lg leading-none">🏷️</span> R$ 85,00 com código
+                        </div>
                     </div>
-                    <div class="bg-white/5 rounded-2xl p-2 md:p-3 mb-6 border border-white/10">
-                        <p class="text-[8px] md:text-[9px] font-bold text-white uppercase">Restam 08 / 10</p>
+                    <div class="bg-white/5 rounded-2xl p-2 md:p-3 mb-6 border border-white/10 text-center">
+                        <p class="text-[8px] md:text-[13px] font-bold uppercase rainbow-pulse-text">Recupere em 2 a 3 dias!</p>
                     </div>
                     <ul class="text-[10px] md:text-[11px] text-slate-400 space-y-2 md:space-y-3 mb-8 flex-grow text-left list-disc pl-4">
                         <li>30 Dias de Acesso</li>
@@ -195,7 +247,7 @@
                         <li>Sugestões de Atualização Futuras</li>
                         <li>Tag [Apoiador] no Discord</li>
                     </ul>
-                    <button onclick="openModal('Silver Key (30 Dias)', 'R$ 100')" class="w-full bg-white text-black py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase hover:bg-slate-200">Obter Prata</button>
+                    <button onclick="openModal('Silver Key (30 Dias)', 100)" class="w-full bg-white text-black py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase hover:bg-slate-200">Obter Prata</button>
                 </div>
 
                 <!-- GOLDEN (90 DIAS) -->
@@ -204,19 +256,22 @@
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-[8px] font-black py-1 px-4 rounded-full uppercase">🔥 Recomendado</div>
                     <div class="text-5xl mb-4 floating-key" style="animation-delay: 0.6s;">🔑</div>
                     <h4 class="text-xs font-black uppercase tracking-[0.2em] text-white mb-4 md:mb-6">Golden Key</h4>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <p class="text-[10px] text-slate-500 line-through">De R$ 600</p>
                         <span class="text-3xl md:text-4xl font-game text-yellow-400">R$ 270</span>
+                        <div class="mt-2 text-yellow-400 font-black text-[11px] md:text-xs bg-yellow-400/10 py-1.5 px-2 rounded-xl border border-yellow-400/20 flex justify-center items-center gap-1.5 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+                            <span class="text-lg leading-none">🏷️</span> R$ 229,50 com código
+                        </div>
                     </div>
                     <div class="bg-yellow-400 rounded-2xl p-2 md:p-3 mb-6">
-                        <p class="text-[8px] md:text-[9px] font-bold text-black uppercase">Restam 05 / 05</p>
+                        <p class="text-[8px] md:text-[10px] font-bold text-black uppercase">O mais vendido e rentável</p>
                     </div>
                     <ul class="text-[10px] md:text-[11px] text-slate-300 space-y-2 md:space-y-3 mb-8 flex-grow font-bold text-left list-disc pl-4">
                         <li>Tudo da Chave Silver</li>
                         <li>90 Dias de Acesso</li>
                         <li>Prioridade em Eventos</li>
                     </ul>
-                    <button onclick="openModal('Golden Key (90 Dias)', 'R$ 270')" class="w-full bg-yellow-400 text-black py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase pulse-button">Comprar Ouro</button>
+                    <button onclick="openModal('Golden Key (90 Dias)', 270)" class="w-full bg-yellow-400 text-black py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase pulse-button">Comprar Ouro</button>
                 </div>
 
                 <!-- DIAMOND (180 DIAS) -->
@@ -224,19 +279,22 @@
                     <div class="absolute top-4 -right-8 bg-red-600 text-white text-[9px] font-black px-10 py-1 rotate-45 uppercase tracking-tighter shadow-lg">60% OFF</div>
                     <div class="text-4xl md:text-5xl mb-4 floating-key" style="animation-delay: 1s;">💎</div>
                     <h4 class="text-xs font-black uppercase tracking-[0.2em] text-cyan-400 mb-4 md:mb-6">Diamond Key</h4>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <p class="text-[10px] text-slate-500 line-through">De R$ 1.250</p>
                         <span class="text-3xl md:text-4xl font-game text-white">R$ 500</span>
+                        <div class="mt-2 text-yellow-400 font-black text-[11px] md:text-xs bg-yellow-400/10 py-1.5 px-2 rounded-xl border border-yellow-400/20 flex justify-center items-center gap-1.5 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+                            <span class="text-lg leading-none">🏷️</span> R$ 425,00 com código
+                        </div>
                     </div>
                     <div class="bg-cyan-400/10 rounded-2xl p-2 md:p-3 mb-6 border border-cyan-400/20">
-                        <p class="text-[8px] md:text-[9px] font-bold text-cyan-400 uppercase">Restam 02 / 02</p>
+                        <p class="text-[8px] md:text-[10px] font-bold text-cyan-400 uppercase">Lucro garantido por 6 meses</p>
                     </div>
                     <ul class="text-[10px] md:text-[11px] text-slate-400 space-y-2 md:space-y-3 mb-8 flex-grow text-left list-disc pl-4">
                         <li>Tudo da Chave Golden</li>
                         <li>180 Dias de Acesso</li>
                         <li>Tag [Fundador] no Discord</li>
                     </ul>
-                    <button onclick="openModal('Diamond Key (180 Dias)', 'R$ 500')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase">Garantir Diamante</button>
+                    <button onclick="openModal('Diamond Key (180 Dias)', 500)" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-3 md:py-4 rounded-2xl font-black text-[9px] md:text-[10px] tracking-widest transition uppercase">Garantir Diamante</button>
                 </div>
             </div>
         </section>
@@ -305,88 +363,149 @@
     </div>
 
     <!-- Modal de Pedido -->
-    <div id="orderModal" class="fixed inset-0 bg-[#020617]/98 flex items-center justify-center p-4 md:p-6 z-[110] hidden backdrop-blur-md overflow-y-auto">
-        <div class="glass w-full max-w-xl p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] relative border border-white/10 my-4 md:my-8">
-            <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition text-2xl md:text-3xl">✕</button>
-            
-            <div class="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
-                <div class="bg-yellow-400/20 p-3 md:p-5 rounded-xl md:rounded-[1.5rem] text-3xl md:text-4xl">🗝️</div>
-                <div class="text-left">
-                    <h5 class="text-lg md:text-2xl font-extrabold text-white uppercase tracking-tighter">Dados do Pedido</h5>
-                    <p id="selectedPlanText" class="text-yellow-400 font-bold italic text-[10px] md:text-sm">Chave: ---</p>
-                </div>
-            </div>
-
-            <!-- AVISO DE REEMBOLSO LIMPO -->
-            <div class="bg-yellow-400/5 border border-yellow-400/20 p-4 rounded-2xl mb-6 text-[11px] leading-relaxed text-left">
-                <p class="text-yellow-400 font-black uppercase mb-1 tracking-widest flex items-center gap-2 text-xs">
-                    <span>⚠️</span> Importante
-                </p>
-                <p class="text-slate-400">
-                    Existe a possibilidade de reembolso <b>APENAS</b> se a chave <b>NÃO</b> tiver sido ativada num período de 3 dias. Caso contrário, o reembolso não será possível.
-                </p>
-            </div>
-
-            <form id="purchaseForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 text-left">
-                <div class="md:col-span-2">
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nome Completo</label>
-                    <input type="text" id="name" placeholder="Seu nome" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none focus:ring-1 focus:ring-yellow-400 transition text-sm">
-                </div>
-                <div>
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nick Roblox</label>
-                    <input type="text" id="nick" placeholder="@SeuNick" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
-                </div>
-                <div>
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">ID Roblox</label>
-                    <input type="text" id="robloxId" placeholder="ID Numérico" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
-                </div>
-
-                <!-- CAMPO NICK DISCORD -->
-                <div class="md:col-span-2">
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nick do Discord</label>
-                    <input type="text" id="discordNick" placeholder="@usuario ou usuario#0000" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none focus:ring-1 focus:ring-yellow-400 transition text-sm">
-                </div>
-
-                <!-- CAMPO PC SIM/NÃO -->
-                <div class="md:col-span-2">
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block italic">Você utiliza computador (PC) para jogar?</label>
-                    <div class="flex gap-4 md:gap-8 items-center bg-slate-900/50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-white/5">
-                        <label class="flex items-center gap-2 cursor-pointer group">
-                            <input type="radio" name="isPC" value="Sim" required class="accent-yellow-400">
-                            <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Sim</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer group">
-                            <input type="radio" name="isPC" value="Não" class="accent-yellow-400">
-                            <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Não</span>
-                        </label>
+    <div id="orderModal" class="fixed inset-0 z-[110] hidden overflow-y-auto bg-[#020617]/98 backdrop-blur-md">
+        <div class="flex min-h-full justify-center p-4 md:p-6">
+            <div class="glass w-full max-w-xl p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] relative border border-white/10 m-auto">
+                <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition text-2xl md:text-3xl">✕</button>
+                
+                <div class="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
+                    <div class="bg-yellow-400/20 p-3 md:p-5 rounded-xl md:rounded-[1.5rem] text-3xl md:text-4xl">🗝️</div>
+                    <div class="text-left">
+                        <h5 class="text-lg md:text-2xl font-extrabold text-white uppercase tracking-tighter">Dados do Pedido</h5>
+                        <p id="selectedPlanText" class="text-yellow-400 font-bold italic text-[10px] md:text-sm">Chave: ---</p>
                     </div>
-                    <!-- MENSAGEM DE ERRO -->
-                    <p id="pc-error" class="text-[8px] md:text-[10px] text-red-500 mt-2 hidden font-black uppercase tracking-tighter leading-tight">
-                        ⚠️ Erro: Somente PC! Este sistema é incompatível com celular ou console.
+                </div>
+
+                <!-- AVISO DE REEMBOLSO LIMPO -->
+                <div class="bg-yellow-400/5 border border-yellow-400/20 p-4 rounded-2xl mb-6 text-[11px] leading-relaxed text-left">
+                    <p class="text-yellow-400 font-black uppercase mb-1 tracking-widest flex items-center gap-2 text-xs">
+                        <span>⚠️</span> Importante
+                    </p>
+                    <p class="text-slate-400">
+                        Existe a possibilidade de reembolso <b>APENAS</b> se a chave <b>NÃO</b> tiver sido ativada num período de 3 dias. Caso contrário, o reembolso não será possível.
                     </p>
                 </div>
 
-                <div class="md:col-span-2">
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">E-mail para Contato</label>
-                    <input type="email" id="email" placeholder="email@exemplo.com" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
-                </div>
-                <div class="md:col-span-2">
-                    <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">WhatsApp</label>
-                    <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
-                </div>
-                <div class="md:col-span-2 pt-2 md:pt-4">
-                    <button type="submit" class="w-full bg-yellow-400 text-black py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-yellow-300 transition-all shadow-[0_10px_30px_rgba(251,191,36,0.2)]">
-                        🚀 Finalizar no WhatsApp
-                    </button>
-                    <p class="text-[7px] md:text-[9px] text-slate-500 text-center uppercase mt-4 md:mt-6 tracking-widest italic">A liberação ocorre via PIX no WhatsApp.</p>
-                </div>
-            </form>
+                <form id="purchaseForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 text-left">
+                    <div class="md:col-span-2">
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nome Completo</label>
+                        <input type="text" id="name" placeholder="Seu nome" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none focus:ring-1 focus:ring-yellow-400 transition text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nick Roblox</label>
+                        <input type="text" id="nick" placeholder="@SeuNick" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">ID Roblox</label>
+                        <input type="text" id="robloxId" placeholder="ID Numérico" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                    </div>
+
+                    <!-- CAMPO NICK DISCORD -->
+                    <div class="md:col-span-2">
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">Nick do Discord</label>
+                        <input type="text" id="discordNick" placeholder="@usuario ou usuario#0000" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none focus:ring-1 focus:ring-yellow-400 transition text-sm">
+                    </div>
+
+                    <!-- SISTEMA DE INDICAÇÃO -->
+                    <div class="md:col-span-2 mt-2">
+                        <label class="text-[8px] md:text-[9px] font-black text-yellow-500 uppercase tracking-widest mb-1 md:mb-2 block italic">Alguém te indicou? (Ganha 15% de Desconto)</label>
+                        <div class="flex gap-4 md:gap-8 items-center bg-slate-900/50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-white/5" id="referralSelectionBox">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="radio" name="hasReferral" value="Não" checked class="accent-yellow-400" onchange="handleReferralChange(this)">
+                                <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Não</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="radio" name="hasReferral" value="Sim" class="accent-yellow-400" onchange="handleReferralChange(this)">
+                                <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Sim</span>
+                            </label>
+                        </div>
+                        
+                        <!-- Caixa de Indicação Ativada (Oculta por padrão) -->
+                        <div id="appliedCreatorBox" class="hidden bg-green-500/10 border border-green-500/30 p-3 md:p-4 rounded-xl md:rounded-2xl flex items-center gap-3 transition-all">
+                            <img id="appliedCreatorIcon" src="" alt="Criador" class="w-10 h-10 rounded-full border-2 border-green-400 object-cover">
+                            <div>
+                                <p class="text-[8px] text-green-400 uppercase font-black tracking-widest mb-0.5">Indicado por:</p>
+                                <p id="appliedCreatorName" class="text-xs md:text-sm text-white font-bold"></p>
+                            </div>
+                            <button type="button" onclick="removeReferral()" class="ml-auto text-red-400 hover:text-red-300 text-[10px] font-bold px-2 py-1 uppercase tracking-widest">Remover</button>
+                        </div>
+                    </div>
+
+                    <!-- CAMPO PC SIM/NÃO -->
+                    <div class="md:col-span-2 mt-2">
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block italic">Você utiliza computador (PC) para jogar?</label>
+                        <div class="flex gap-4 md:gap-8 items-center bg-slate-900/50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-white/5">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="radio" name="isPC" value="Sim" required class="accent-yellow-400">
+                                <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Sim</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="radio" name="isPC" value="Não" class="accent-yellow-400">
+                                <span class="text-[10px] md:text-xs font-bold text-white group-hover:text-yellow-400 transition uppercase">Não</span>
+                            </label>
+                        </div>
+                        <!-- MENSAGEM DE ERRO -->
+                        <p id="pc-error" class="text-[8px] md:text-[10px] text-red-500 mt-2 hidden font-black uppercase tracking-tighter leading-tight">
+                            ⚠️ Erro: Somente PC! Este sistema é incompatível com celular ou console.
+                        </p>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">E-mail para Contato</label>
+                        <input type="email" id="email" placeholder="email@exemplo.com" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="text-[8px] md:text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1 md:mb-2 block">WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
+                    </div>
+                    <div class="md:col-span-2 pt-2 md:pt-4">
+                        <button type="submit" class="w-full bg-yellow-400 text-black py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-yellow-300 transition-all shadow-[0_10px_30px_rgba(251,191,36,0.2)]">
+                            🚀 Finalizar no WhatsApp
+                        </button>
+                        <p class="text-[7px] md:text-[9px] text-slate-500 text-center uppercase mt-4 md:mt-6 tracking-widest italic">A liberação ocorre via PIX no WhatsApp.</p>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
+    <!-- Modal do Código de Indicação -->
+    <div id="referralModal" class="fixed inset-0 z-[120] hidden overflow-y-auto bg-[#020617]/80 backdrop-blur-xl transition-opacity">
+        <div class="flex min-h-full justify-center p-4">
+            <div class="relative glass w-full max-w-sm p-8 rounded-[2rem] border border-yellow-400/30 text-center flex flex-col items-center justify-center m-auto" id="referralModalContent">
+                <button onclick="closeReferralModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition text-2xl">✕</button>
+                
+                <!-- Estado 1: Digitação do Código -->
+                <div id="referralInputState" class="w-full mt-2">
+                    <h3 class="font-game text-2xl text-yellow-400 mb-2 uppercase">Código do Criador</h3>
+                    <p class="text-[9px] text-slate-400 mb-6 font-bold uppercase tracking-widest">Ganhe 15% de Desconto!</p>
+                    
+                    <input type="text" id="referralCodeInput" placeholder="CÓDIGO" class="font-luckiest text-center text-3xl md:text-4xl w-full bg-slate-900/80 border-2 border-slate-600 focus:border-yellow-400 rounded-2xl p-4 text-white uppercase outline-none mb-2 transition-colors placeholder:text-slate-700">
+                    <p id="referralErrorMsg" class="text-red-500 text-[10px] font-black uppercase tracking-widest h-4 mb-4 opacity-0 transition-opacity">⚠️ Código Inválido!</p>
+                    
+                    <button type="button" onclick="validateReferral()" class="w-full bg-yellow-400 text-black py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-yellow-300 transition-all shadow-[0_5px_15px_rgba(251,191,36,0.2)]">Validar Código</button>
+                </div>
+
+                <!-- Estado 2: Sucesso (Efeito Pop com Foto e Nome) -->
+                <div id="referralSuccessState" class="hidden flex flex-col items-center justify-center w-full py-6">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-0 bg-green-500/20 blur-xl rounded-full"></div>
+                        <img id="successCreatorIcon" src="" alt="Criador" class="relative w-28 h-28 rounded-full border-4 border-green-400 shadow-[0_0_30px_rgba(34,197,94,0.4)] object-cover z-10">
+                    </div>
+                    <h4 class="font-game text-3xl text-white mb-2 uppercase" id="successCreatorName">Nome</h4>
+                    <p class="text-green-400 text-[10px] font-black uppercase tracking-widest">Desconto Aplicado!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importação dos Códigos Externos -->
+    <script src="referrals.js"></script>
+    
     <script>
-        let currentPlan = "";
-        let currentPrice = "";
+        let currentPlanName = "";
+        let currentPlanBasePrice = 0;
+        let appliedReferral = null; // Guarda o criador que foi validado
 
         const MEU_WHATSAPP = "5571986950984"; 
 
@@ -407,20 +526,123 @@
             }, 600);
         }
 
+        // Sistema do Modal Principal (Compra)
         function openModal(plan, price) {
-            currentPlan = plan;
-            currentPrice = price;
-            document.getElementById('selectedPlanText').innerText = `CHAVE: ${plan} - VALOR: ${price}`;
+            currentPlanName = plan;
+            currentPlanBasePrice = price;
+            
+            updateModalPriceDisplay();
+            
             document.getElementById('orderModal').classList.remove('hidden');
             document.getElementById('pc-error').classList.add('hidden'); // Reseta erro
             document.body.style.overflow = 'hidden';
+            removeReferral(); // Limpa as indicações ao abrir de novo
         }
 
         function closeModal() {
             document.getElementById('orderModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
+        
+        // Atualiza a visualização do preço no modal dependendo do desconto
+        function updateModalPriceDisplay() {
+            let finalPrice = currentPlanBasePrice;
+            if (appliedReferral) {
+                finalPrice = currentPlanBasePrice * 0.85; // Desconto de 15%
+            }
+            document.getElementById('selectedPlanText').innerText = `CHAVE: ${currentPlanName} - VALOR: R$ ${finalPrice.toFixed(2).replace('.', ',')}`;
+        }
 
+        // =========================================================
+        // LÓGICA DE CÓDIGO DE INDICAÇÃO
+        // =========================================================
+        function handleReferralChange(radio) {
+            if (radio.value === "Sim") {
+                document.getElementById('referralModal').classList.remove('hidden');
+                document.getElementById('referralCodeInput').value = '';
+                document.getElementById('referralCodeInput').focus();
+                document.getElementById('referralErrorMsg').style.opacity = '0';
+                
+                // Reseta visuais do modal
+                document.getElementById('referralInputState').classList.remove('hidden');
+                document.getElementById('referralSuccessState').classList.add('hidden');
+                document.getElementById('referralModalContent').classList.remove('pop-in');
+            } else {
+                removeReferral();
+            }
+        }
+
+        function closeReferralModal() {
+            document.getElementById('referralModal').classList.add('hidden');
+            // Se fechou sem aplicar, volta a seleção pra "Não"
+            if (!appliedReferral) {
+                document.querySelector('input[name="hasReferral"][value="Não"]').checked = true;
+            }
+        }
+
+        function validateReferral() {
+            const codeInput = document.getElementById('referralCodeInput').value.trim().toUpperCase();
+            const modalContent = document.getElementById('referralModalContent');
+            const errorMsg = document.getElementById('referralErrorMsg');
+            
+            // validReferralCodes vem do arquivo referrals.js
+            if (typeof validReferralCodes !== 'undefined' && validReferralCodes[codeInput]) {
+                // SUCESSO!
+                const creator = validReferralCodes[codeInput];
+                appliedReferral = creator;
+                
+                // Prepara a tela de sucesso
+                document.getElementById('successCreatorIcon').src = creator.icon;
+                // Fallback caso a imagem não exista
+                document.getElementById('successCreatorIcon').onerror = function() { this.src = 'https://via.placeholder.com/150/22c55e/000?text=' + codeInput };
+                document.getElementById('successCreatorName').innerText = creator.name;
+                
+                // Troca os estados
+                document.getElementById('referralInputState').classList.add('hidden');
+                document.getElementById('referralSuccessState').classList.remove('hidden');
+                
+                // Aplica efeito POP
+                modalContent.classList.remove('shake');
+                void modalContent.offsetWidth; // Trigger reflow
+                modalContent.classList.add('pop-in');
+                
+                // Aguarda 2 segundos para pessoa ver o sucesso e depois joga pro formulário
+                setTimeout(() => {
+                    closeReferralModal();
+                    
+                    // Modifica o formulário para mostrar o criador aplicado
+                    document.getElementById('referralSelectionBox').classList.add('hidden');
+                    document.getElementById('appliedCreatorBox').classList.remove('hidden');
+                    document.getElementById('appliedCreatorIcon').src = creator.icon;
+                    document.getElementById('appliedCreatorIcon').onerror = function() { this.src = 'https://via.placeholder.com/150/22c55e/000?text=' + codeInput };
+                    document.getElementById('appliedCreatorName').innerText = creator.name;
+                    
+                    // Atualiza o preço exibido no modal!
+                    updateModalPriceDisplay();
+                    
+                }, 2000); 
+
+            } else {
+                // ERRO! (Código Inválido)
+                errorMsg.style.opacity = '1';
+                modalContent.classList.remove('shake');
+                void modalContent.offsetWidth; // Trigger reflow
+                modalContent.classList.add('shake');
+            }
+        }
+
+        function removeReferral() {
+            appliedReferral = null;
+            document.querySelector('input[name="hasReferral"][value="Não"]').checked = true;
+            document.getElementById('referralSelectionBox').classList.remove('hidden');
+            document.getElementById('appliedCreatorBox').classList.add('hidden');
+            updateModalPriceDisplay(); // Tira o desconto se remover a indicação
+        }
+
+
+        // =========================================================
+        // ENVIO PARA O WHATSAPP
+        // =========================================================
         document.getElementById('purchaseForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -447,13 +669,21 @@
             
             const pedidoID = Math.floor(Math.random() * 90000) + 10000;
             
+            // Calcula o valor final com o desconto de 15% caso haja indicação
+            const finalPrice = appliedReferral ? (currentPlanBasePrice * 0.85) : currentPlanBasePrice;
+            const priceString = "R$ " + finalPrice.toFixed(2).replace('.', ',');
+
+            // Verifica se tem indicação para adicionar na mensagem
+            const indicacaoText = appliedReferral ? `*Indicado por:* ${appliedReferral.name}\n` : "";
+
             // CONSTRUÇÃO DA MENSAGEM COM EMOJIS COMPATÍVEIS
             const message = 
                 "*NOVO PEDIDO - 999 INTERATIVO*\n" +
                 "*Pedido:* #" + pedidoID + "\n" +
-                "*Chave:* " + currentPlan + "\n" +
-                "*Valor:* " + currentPrice + "\n" +
+                "*Chave:* " + currentPlanName + "\n" +
+                "*Valor:* " + priceString + "\n" +
                 "*Plataforma:* PC CONFIRMADO\n" +
+                indicacaoText +
                 "----------------------------\n" +
                 "*Cliente:* " + userData.name + "\n" +
                 "*Nick Roblox:* " + userData.nick + "\n" +
