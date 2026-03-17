@@ -390,7 +390,7 @@
                         <span>⚠️</span> Importante
                     </p>
                     <p class="text-slate-400">
-                        Existe a possibilidade de reembolso <b>APENAS</b> se a chave <b>NÃO</b> tiver sido ativada num período de 3 dias. Caso contrário, o reembolso não será possível.
+                        Existe a possibilidade de reembolso <b>APENAS</b> se a chave <b>NÃO</b> tiver sido ativada em um período de 3 dias. Caso contrário, o reembolso não será possível.
                     </p>
                 </div>
 
@@ -467,6 +467,18 @@
                         <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required class="w-full bg-slate-900 border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl text-white outline-none transition text-sm">
                     </div>
                     <div class="md:col-span-2 pt-2 md:pt-4">
+                        
+                        <!-- AVISO ANTI-GOLPE IMPLEMENTADO AQUI -->
+                        <div class="bg-green-500/10 border border-green-500/20 p-3 md:p-4 rounded-xl md:rounded-2xl mb-4 flex items-start gap-3">
+                            <span class="text-green-400 text-lg md:text-xl leading-none">🔒</span>
+                            <div>
+                                <p class="text-[9px] md:text-[10px] font-black text-green-400 uppercase tracking-widest mb-0.5">Dica de Segurança Anti-Golpes</p>
+                                <p class="text-slate-400 text-[8px] md:text-[13px] leading-relaxed">
+                                    Para sua proteção, ao realizar o pagamento no WhatsApp, verifique sempre se o titular do PIX é <b>"Rafael P. dos Santos - Banco INTER"</b>. Nunca pague para terceiros.
+                                </p>
+                            </div>
+                        </div>
+
                         <button type="submit" class="w-full bg-yellow-400 text-black py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-yellow-300 transition-all shadow-[0_10px_30px_rgba(251,191,36,0.2)]">
                             🚀 Finalizar no WhatsApp
                         </button>
@@ -515,7 +527,10 @@
         let currentPlanBasePrice = 0;
         let appliedReferral = null; // Guarda o criador que foi validado
 
-        const MEU_WHATSAPP = "5571986950984"; 
+        // Número oculto (ofuscado em Base64 dividido) para evitar cópias rápidas do seu código
+        const _pt1 = "NTU3MTk4";
+        const _pt2 = "Njk1MDk4NA==";
+        const MEU_WHATSAPP = atob(_pt1 + _pt2);
 
         // Entrar no site e remover Splash
         function enterSite() {
