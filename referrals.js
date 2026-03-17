@@ -12,7 +12,12 @@ const validReferralCodes = {
     
     "DZX": { 
         name: "DZX DropZone", 
-        icon: "icones_streamers/icone_dzx.jpeg" 
+        icon: "icones_streamers/01_icone_dzx.jpeg" 
+    },
+
+    "ZETSU3K": { 
+        name: "Zetsu3K", 
+        icon: "icones_streamers/02_icone_zetsu3k.jpeg" 
     },
     
     // Adicione os próximos abaixo seguindo a mesma estrutura:
