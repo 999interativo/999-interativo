@@ -7,12 +7,12 @@
 const validReferralCodes = {
     "LUCK": { 
         name: "Luck Game", 
-        icon: "luck.png" 
+        icon: "icones_streamers/luck.png" 
     },
     
-    "STREAMER1": { 
-        name: "Nome do Streamer", 
-        icon: "streamer1.jpg" 
+    "DZX": { 
+        name: "DZX DropZone", 
+        icon: "icones_streamers/icone_dzx.jpeg" 
     },
     
     // Adicione os próximos abaixo seguindo a mesma estrutura:
