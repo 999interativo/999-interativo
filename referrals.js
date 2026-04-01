@@ -19,6 +19,11 @@ const validReferralCodes = {
         name: "Zetsu3K", 
         icon: "icones_streamers/02_icone_zetsu3k.jpeg" 
     },
+
+    "DARIOJOGA": { 
+        name: "DarioJoga", 
+        icon: "icones_streamers/03_icone_darioFernandes.jpeg" 
+    },
     
     // Adicione os próximos abaixo seguindo a mesma estrutura:
     // "NOME_DO_CODIGO": { name: "Nome Bonito", icon: "foto.png" },
